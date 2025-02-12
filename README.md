@@ -40,18 +40,14 @@
 | typing_extensions | 4.12.2  |
 | uvicorn           | 0.34.0  |
 
-Get API
-Get All API
+## Learning
+* Get API: `@app.get("/")`
+* Get All API: `@app.get("/people")`
+* Get API with Path Param: `@app.get("/person/{person_id}")`
+* Post API with Path and Query(Optional and Default) Param: `@app.post("/person/{person_id}/v1")`
+* Post API with Request Body: `@app.post("/person/{person_id}/v2")`
+* Put API with Request Body: `@app.put("/person/{person_id}")`
+* Patch API with Request Body(Optional Fields): `@app.patch("/person/{person_id}")`
+* Delete API with Path Param: `@app.delete("/person/{person_id}")`
 
-Get API with Path Param
-Get API Path Param With Description
-Get API with Query Param
-
-Post API Query Param with Default Value
-Post API Query Param with Optional Value(Best option -> from typing import Optional)
-
-Patch API with Path and Query Params
-
-Post API with Request Body
-Put API with Request Body
-Patch API Request Body with Optional Fields
+> Best option for optional query params -> from typing import Optional)
