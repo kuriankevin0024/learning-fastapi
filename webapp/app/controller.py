@@ -1,7 +1,8 @@
 import uvicorn
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from typing import Optional
 from pydantic import BaseModel
+from urllib.parse import urlencode
 
 class Person(BaseModel):
     name: str
@@ -84,6 +85,37 @@ def delete_person(person_id: int):
         return {"data": "Person Does Not Exist"}
     del people[person_id]
     return {"data": f"Person Deleted. ID:{person_id}"}
+
+@app.post("/person/{person_id}/v3", name="create_person_href")
+def create_person_href(request: Request, person_id: int, name: str, age: int, male: bool = True,
+               religion: str = None, job: Optional[str] = None):
+    if person_id in people:
+        return {"data": "Person Exists"}
+    if religion is None:
+        religion = "None"
+    if job is None:
+        job = "None"
+    people[person_id] = Person(name=name, age=age, male=male, religion=religion, job=job)
+
+    # approach 1: simple
+    generated_href = str(request.url)
+    print(f"simple href: {generated_href}")
+
+    # approach 2: custom
+    base_url = request.url_for("create_person_href", person_id=person_id)
+    query_params = request.query_params
+    if query_params:
+        query_string = urlencode(query_params, doseq=True)
+        generated_href = f"{base_url}?{query_string}"
+    else:
+        generated_href = base_url
+    print(f"custom href: {generated_href}")
+
+    response = {
+        "href": generated_href,
+        "person": people[person_id]
+    }
+    return response
 
 if __name__ == "__main__":
     uvicorn.run("controller:app", reload=True)

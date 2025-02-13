@@ -49,5 +49,6 @@
 * Put API with Request Body: `@app.put("/person/{person_id}")`
 * Patch API with Request Body(Optional Fields): `@app.patch("/person/{person_id}")`
 * Delete API with Path Param: `@app.delete("/person/{person_id}")`
+* Adding href to response body: `@app.post("/person/{person_id}/v3", name="create_person_href")`
 
 > Best option for optional query params -> from typing import Optional)
