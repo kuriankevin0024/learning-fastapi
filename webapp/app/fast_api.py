@@ -101,4 +101,4 @@ def create_person(request: Request, person_index: int, name: str, age: int, male
     }
 
 if __name__ == "__main__":
-    uvicorn.run("controller:app", reload=True)
+    uvicorn.run("fast_api:app", reload=True)

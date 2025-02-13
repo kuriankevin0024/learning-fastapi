@@ -41,7 +41,8 @@
 | typing_extensions | 4.12.2  |
 | uvicorn           | 0.34.0  |
 
-## Learning
+## FastAPI
+* Path: `webapp/app/fast_api.py`
 * Root Get API: `@app.get("/")`
 * Get API with Path Param: `@app.get("/person/{person_index}")`
 * Post API with Request Body: `@app.post("/person")`
@@ -52,8 +53,12 @@
 * Post API with Path and Query(Default and Optional) Params: `@app.post("/person/{person_index}", name="create_person")`
 * Adding href(Simple and Custom) to response body: `@app.post("/person/{person_index}", name="create_person")`
 
-## Documentation in swagger
-* Path: `webapp/app/document.py`
+## APIRouter
+* Path: `webapp/app/api_router.py`
+* Adding paths from different files
+
+## Swagger API
+* Path: `webapp/app/swagger_api.py`
 * Default success response example value: `@app.post("/person", response_model=PersonResponse)`
 * Custom success response example value and description: `@app.get("/student/{student_index}", response_model=StudentResponse)`
 * Description and validation for path param: `@app.get("/student/{student_index}", response_model=StudentResponse)`
@@ -62,4 +67,8 @@
 * Return exception in case of failure: `@app.get("/student/{student_index}", response_model=StudentResponse)`
 * Creating response object from request object: `@app.post("/student", response_model=StudentResponse)`
 
-> Best option for optional query params -> from typing import Optional)
+> Best option for optional query params -> from typing import Optional
+
+# Todo
+* APIRouter Learning
+* Pydentic Learning
