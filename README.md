@@ -41,34 +41,26 @@
 | typing_extensions | 4.12.2  |
 | uvicorn           | 0.34.0  |
 
-## FastAPI
-* Path: `webapp/app/fast_api.py`
-* Root Get API: `@app.get("/")`
-* Get API with Path Param: `@app.get("/person/{person_index}")`
-* Post API with Request Body: `@app.post("/person")`
-* Put API with Path Param and Request Body: `@app.put("/person/{person_index}")`
-* Patch API with Path Param and Request Body(Optional Fields): `@app.patch("/person/{person_index}")`
-* Delete API with Path Param: `@app.delete("/person/{person_index}")`
-* Get All API: `@app.get("/people")`
-* Post API with Path and Query(Default and Optional) Params: `@app.post("/person/{person_index}", name="create_person")`
-* Adding href(Simple and Custom) to response body: `@app.post("/person/{person_index}", name="create_person")`
+## FastAPI Implementations
+### Vanilla Implementation
+* Path: `webapp/app/fast_api/fast_api_v1.py`
+### DataClass Implementation
+* Path: `webapp/app/fast_api/fast_api_v2.py`
+* @dataclass: used to create request and response objects
+### Pydantic Implementation
+* Path: `webapp/app/fast_api/fast_api_v3.py`
+* Pydantic BaseModel: used to create request and response objects
+* Pydantic Field: used to provide documentation and basic validation
+### Documentation Implementation
+* Path: `webapp/app/fast_api/fast_api_v4.py`
+* FastAPI HTTPException: used to return response code and response message
+* FastAPI Path, Query and Body: used to provide documentation and basic validation
+  * Path cannot have optional or default value
+  * Body description is not working as expected
+* response_model: used to update basic example for success response
+* Config.json_schema_extra: used to update documentation and custom example for success response
+* request: used to collect url, path and query information to create href
 
 ## APIRouter
 * Path: `webapp/app/api_router.py`
 * Adding paths from different files
-
-## Swagger API
-* Path: `webapp/app/swagger_api.py`
-* Default success response example value: `@app.post("/person", response_model=PersonResponse)`
-* Custom success response example value and description: `@app.get("/student/{student_index}", response_model=StudentResponse)`
-* Description and validation for path param: `@app.get("/student/{student_index}", response_model=StudentResponse)`
-* Description, validation and default value for query param: `@app.post("/student/{student_id}", response_model=StudentResponse)`
-* Description, validation and default value for fields in request and response object: `@app.post("/student", response_model=StudentResponse)`
-* Return exception in case of failure: `@app.get("/student/{student_index}", response_model=StudentResponse)`
-* Creating response object from request object: `@app.post("/student", response_model=StudentResponse)`
-
-> Best option for optional query params -> from typing import Optional
-
-# Todo
-* APIRouter Learning
-* Pydentic Learning

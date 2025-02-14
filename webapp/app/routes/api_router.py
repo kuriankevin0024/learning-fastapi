@@ -1,6 +1,6 @@
 import uvicorn
 from fastapi import FastAPI
-from routes import health, metrics
+import health, metrics
 
 app = FastAPI()
 
