@@ -11,9 +11,8 @@ def root():
 
 class Data(BaseModel):
     m_bool: bool = Field(True, description="m bool") # default
-    # m_int: int = Field(description="m int", ge=0, lt=10) # mandatory -> less readable
-    m_int: int = Field(..., description="m int", ge=0, lt=10) # mandatory
-    m_str: str = Field(None, description="m str", min_length=2, max_length=10) # optional
+    m_int: int = Field(description="m int", ge=0, lt=10) # mandatory
+    m_str: str = Field(..., description="m str", min_length=2, max_length=10) # mandatory
 
 class OptionalData(BaseModel):
     o_bool: Optional[bool] = Field(None, description="o bool") # optional
@@ -50,12 +49,12 @@ def patch_data(index: int, optional_data: OptionalData):
     if index not in data_dict:
         return {"message": "data does not exist"}
     data = data_dict[index]
-    if optional_data.m_bool is not None:
-        data.m_bool = optional_data.m_bool
-    if optional_data.m_int is not None:
-        data.m_int = optional_data.m_int
-    if optional_data.m_str is not None:
-        data.m_str = optional_data.m_str
+    if optional_data.o_bool is not None:
+        data.m_bool = optional_data.o_bool
+    if optional_data.o_int is not None:
+        data.m_int = optional_data.o_int
+    if optional_data.o_str is not None:
+        data.m_str = optional_data.o_str
     return data_dict[index]
 
 @app.delete("/data/{index}")
